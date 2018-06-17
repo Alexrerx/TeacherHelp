@@ -19,6 +19,7 @@ public class StudentAdapter extends ArrayAdapter<Student> {
     private DataHelper dh;
     public StudentAdapter(@NonNull Context context, int resource) {
         super(context, resource);
+        dh=DataHelper.getInstance(context);
     }
     public StudentAdapter(Context context){
         super(context,R.layout.layout_student_item);
@@ -49,11 +50,12 @@ public class StudentAdapter extends ArrayAdapter<Student> {
         ((TextView)itemView.findViewById(R.id.textSubject))
                 .setText(students.get(position).getSubject());
         ((TextView)itemView.findViewById(R.id.textPrice))
-                .setText(students.get(position).getPrice());
+                .setText(String.valueOf(students.get(position).getPrice()));
 
         Button btnDel = itemView.findViewById(R.id.delstudent);
-        dh = new DataHelper(getContext());
-
+        if(dh==null) {
+            dh = DataHelper.getInstance(getContext());
+        }
         final SQLiteDatabase database = dh.getWritableDatabase();
         btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
