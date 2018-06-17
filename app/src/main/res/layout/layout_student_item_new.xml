@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+              android:layout_width="match_parent"
+              android:layout_height="70dp">
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:text="Иванов В.Н"
+                android:gravity="center"
+                android:textSize="10pt"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                />
+            <TextView
+                android:layout_weight="6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Физика"
+                android:gravity="center"
+                android:textSize="10pt"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="10pt"
+            android:textColor="#2861ff"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="м. Партизанская"/>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="ЧТ"
+            android:textSize="8pt"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="14:00"
+            android:gravity="center"
+            android:textSize="9pt"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
