@@ -10,15 +10,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/FIO"
-            android:layout_width="match_parent"
+        <FrameLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="ФИО"
-            />
+            android:layout_marginTop="5dp">
+            <EditText
+                android:id="@+id/FIO"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:inputType="textPersonName"
+                android:hint="ФИО"/>
+
+            <!--android:background="@android:drawable/ic_input_delete" />-->
+
+            <ImageButton
+                android:id="@+id/clear_FIO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_gravity="right|center_vertical"
+                android:background="@drawable/delete_text_itog" />
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
 
         <EditText
             android:id="@+id/subject"
@@ -27,14 +44,57 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Предмет"/>
+            <ImageButton
+                android:id="@+id/clear_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_gravity="right|center_vertical"
+                android:background="@drawable/delete_text_itog" />
 
-        <EditText
-            android:id="@+id/timelesson"
-            android:layout_width="match_parent"
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="Время"/>
+            android:layout_marginTop="5dp">
+
+
+                <TextView
+                    android:id="@+id/timelesson"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    android:text="Время" />
+
+                <TextView
+                    android:id="@+id/day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:ems="10"
+                    android:text="День" />
+            <ImageButton
+                android:id="@+id/clear_timelesson"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_gravity="right|center_vertical"
+                android:background="@drawable/delete_text_itog" />
+
+            <Spinner
+                android:id="@+id/dayspinner"
+                android:layout_width="61dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="35dp" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
 
         <EditText
             android:id="@+id/duration"
@@ -43,6 +103,19 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Длина занятия"/>
+            <ImageButton
+                android:id="@+id/clear_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_gravity="right|center_vertical"
+                android:background="@drawable/delete_text_itog" />
+
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
 
         <EditText
             android:id="@+id/address"
@@ -51,6 +124,18 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Адрес"/>
+            <ImageButton
+                android:id="@+id/clear_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_gravity="right|center_vertical"
+                android:background="@drawable/delete_text_itog" />
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
 
         <EditText
             android:id="@+id/price"
@@ -59,18 +144,20 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:hint="Цена"/>
+            <ImageButton
+                android:id="@+id/clear_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15dp"
+                android:layout_gravity="right|center_vertical"
+                android:background="@drawable/delete_text_itog" />
+        </FrameLayout>
 
         <Button
             android:id="@+id/btnOk"
             android:layout_width="115dp"
             android:layout_height="wrap_content"
             android:text="OK" />
-
-        <Button
-            android:id="@+id/btnRst"
-            android:layout_width="115dp"
-            android:layout_height="wrap_content"
-            android:text="Reset" />
 
 
     </LinearLayout>

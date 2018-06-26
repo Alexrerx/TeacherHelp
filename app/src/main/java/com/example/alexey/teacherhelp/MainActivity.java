@@ -1,16 +1,22 @@
 package com.example.alexey.teacherhelp;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
+    TextView FIO;
     ListView lvstudents;
     Button btnAdd;
     DataHelper dh;
@@ -24,8 +30,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lvstudents = (ListView)findViewById(R.id.lvstudents);
         btnAdd.setOnClickListener(this);
         dh = DataHelper.getInstance(this);
-        studentAdapter = new StudentAdapter(this,R.layout.layout_student_item);
+        studentAdapter = new StudentAdapter(this,R.layout.layout_student_item_new);
         lvstudents.setAdapter(studentAdapter);
+        FIO = (TextView)findViewById(R.id.textFIO);
+        registerForContextMenu(lvstudents);
     }
 
     @Override

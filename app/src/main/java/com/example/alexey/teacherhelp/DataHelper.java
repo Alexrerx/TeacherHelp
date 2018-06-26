@@ -22,7 +22,7 @@ public class DataHelper extends SQLiteOpenHelper {
         Log.e("MyLog","DB created");
         db.execSQL("create table students ("
                 + "id integer primary key autoincrement," +
-                "FIO text," + "subject text," + "duration integer," + "time text," +
+                "FIO text," + "subject text," + "duration integer," + "time text," + "day text," +
                 "address text,"
         + "price integer" + ");");
     }
@@ -38,9 +38,13 @@ public class DataHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-//    public void deleteStudentById(SQLiteDatabase db,int id){
-//        db.delete("students","id = " + id,null);
-//    }
+    public void deleteStudentById(SQLiteDatabase db,int id){
+        db.delete("students","id = " + id,null);
+    }
+    public void deleteStudentByFIO(SQLiteDatabase db,String FIO){
+        db.delete("students","FIO = " + FIO,null);
+    }
+
 
     public List <Student> getAll(){
 
@@ -54,6 +58,7 @@ public class DataHelper extends SQLiteOpenHelper {
             int subjectColIndex = c.getColumnIndex("subject");
             int durationColIndex = c.getColumnIndex("duration");
             int timeColIndex = c.getColumnIndex("time");
+            int dayColIndex = c.getColumnIndex("day");
             int addressColIndex = c.getColumnIndex("address");
             int priceColIndex = c.getColumnIndex("price");
 
@@ -61,7 +66,9 @@ public class DataHelper extends SQLiteOpenHelper {
                 Log.d("MyLogs","----Insert----");
                 students.add(new Student(c.getInt(idColIndex),c.getString(FIOColIndex),
                         c.getString(subjectColIndex),c.getInt(durationColIndex),
-                        c.getString(timeColIndex),c.getString(addressColIndex),
+                        c.getString(timeColIndex),
+                        c.getString(dayColIndex),
+                        c.getString(addressColIndex),
                         c.getInt(priceColIndex)));
 
             }while (c.moveToNext());
@@ -71,5 +78,14 @@ public class DataHelper extends SQLiteOpenHelper {
         c.close();
         return students;
     }
+    public String[] Update(int position){
+        String[] data = new String[7];
+        Cursor c = dataHelper.getReadableDatabase().query("students",null,null,
+                null,null,null,null);
+
+        return data;
+    }
+
+
 
 }

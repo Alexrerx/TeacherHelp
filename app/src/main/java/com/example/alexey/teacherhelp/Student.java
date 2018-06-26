@@ -5,6 +5,7 @@ public class Student {
     private int id;
     private int price;
     private int duration;
+    private String day;
     private String FIO;
     private String address;
     private String time;
@@ -12,12 +13,13 @@ public class Student {
 
 
     public Student(int id,String FIO,String subject,int duration,
-                   String time, String address,int price){
+                   String time, String day, String address,int price){
         this.id = id;
         this.FIO = FIO;
         this.subject = subject;
         this.duration = duration;
         this.time = time;
+        this.day = day;
         this.address = address;
         this.price = price;
     }
@@ -26,6 +28,9 @@ public class Student {
 
     }
 
+    public String getDay(){
+        return day;
+    }
     public int getId(){
         return id;
     }
