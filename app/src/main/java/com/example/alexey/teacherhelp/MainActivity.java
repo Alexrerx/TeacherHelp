@@ -1,5 +1,7 @@
 package com.example.alexey.teacherhelp;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnAdd;
     DataHelper dh;
     private StudentAdapter studentAdapter;
+    AlarmManager alarmManager;
+    PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +38,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lvstudents.setAdapter(studentAdapter);
         FIO = (TextView)findViewById(R.id.textFIO);
         registerForContextMenu(lvstudents);
+
+
+        //Notifications
+
+
+        Intent intent = new Intent(getApplicationContext(),AlarmReciever.class);
+
+        pendingIntent = PendingIntent.getBroadcast(getApplicationContext(),0,intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
     @Override

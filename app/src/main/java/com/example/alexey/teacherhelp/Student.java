@@ -11,6 +11,9 @@ public class Student {
     private String time;
     private String subject;
 
+    public Student(){
+
+    }
 
     public Student(int id,String FIO,String subject,int duration,
                    String time, String day, String address,int price){

@@ -1,12 +1,16 @@
 package com.example.alexey.teacherhelp;
 
+import android.app.AlarmManager;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.ContentValues;
+import android.content.IntentFilter;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.FileObserver;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +26,7 @@ import org.w3c.dom.Text;
 
 public class AddActivity extends AppCompatActivity implements View.OnClickListener {
 
+    int actioncode;
     String[] daysofweek = {"пн","вт","ср","чт","пт","сб","вс"};
     int DIALOG_TIME = 1;
     int myHour = 0;
@@ -32,10 +37,14 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     EditText FIO,subject,duration,address,price;
     ImageButton FIOclear,subjectclear,addressclear,durationclear,timelessonclear,priceclear;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+        dataHelper = DataHelper.getInstance(this);
 
         btnOk = (Button)findViewById(R.id.btnOk);
 
@@ -65,14 +74,12 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         btnOk.setOnClickListener(this);
 
         timelesson.setOnClickListener(this);
-        dataHelper = DataHelper.getInstance(this);
 
         ArrayAdapter <String> spinneradapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,daysofweek);
         spinneradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         final Spinner dayspinner = (Spinner)findViewById(R.id.dayspinner);
         dayspinner.setAdapter(spinneradapter);
         dayspinner.setPrompt("День недели");
-        dayspinner.setSelection(2);
         dayspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -81,9 +88,21 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+                day.setText("No");
             }
         });
+        actioncode = getIntent().getIntExtra("id",-5);
+        Log.d("my",actioncode+"");
+        if (actioncode != -5){
+           Student student = dataHelper.getStudentById(actioncode);
+            FIO.setText(student.getFIO());
+            subject.setText(student.getSubject());
+            timelesson.setText(student.getTime());
+            day.setText(student.getDay());
+            address.setText(student.getAddress());
+            price.setText(student.getPrice() + "");
+            duration.setText(student.getDuration() + "");
+        }
     }
 
     protected Dialog onCreateDialog(int id){
@@ -117,26 +136,41 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         String daytext = day.getText().toString();
 
         SQLiteDatabase database = dataHelper.getWritableDatabase();
+        Student student = dataHelper.getStudentById(actioncode);
         switch (v.getId()){
 
             case R.id.timelesson:
                 showDialog(DIALOG_TIME);
                 break;
             case R.id.btnOk:
-                btnOk.setClickable((isEmpty(FIO)) && (isEmpty(address)));
                 if ((!isEmpty(FIO,"Введите ФИО!"))&&(!isEmpty(address,"Введите адрес!"))){
-                    contentValues.put("FIO",FIOtext);
-                    contentValues.put("subject",subjecttext);
-                    contentValues.put("time",timelessontext);
-                    contentValues.put("day",daytext);
-                    contentValues.put("duration",durationtext);
-                    contentValues.put("address",addresstext);
-                    contentValues.put("price",pricetext);
-                    database.insert("students",null,contentValues);
+                    if (actioncode != -5) {
+                        if (student != null) {
+                            contentValues.put("id", student.getId());
+                            contentValues.put("FIO", FIOtext);
+                            contentValues.put("subject", subjecttext);
+                            contentValues.put("time", timelessontext);
+                            contentValues.put("day", daytext);
+                            contentValues.put("duration", durationtext);
+                            contentValues.put("address", addresstext);
+                            contentValues.put("price", pricetext);
+                            database.update("students", contentValues, "id = " + student.getId(), null);
 
-                    finish();
+                            finish();
+                        }
+                    }
+                        contentValues.put("FIO", FIOtext);
+                        contentValues.put("subject", subjecttext);
+                        contentValues.put("time", timelessontext);
+                        contentValues.put("day", daytext);
+                        contentValues.put("duration", durationtext);
+                        contentValues.put("address", addresstext);
+                        contentValues.put("price", pricetext);
+                        database.insert("students", null, contentValues);
+
+                        finish();
+
                 }
-                btnOk.setClickable(true);
                 break;
 
 
